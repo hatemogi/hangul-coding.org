@@ -11,6 +11,16 @@
   [:footer.꼬리말
    [:div "2016 김대현 올림"]])
 
+(함수- GA [코드]
+  [:script
+   "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '" 코드 "', 'auto');
+  ga('send', 'pageview');"])
+
 (함수 레이아웃 [속성 & 본문]
   (html5
    [:html {:lang "ko"}
@@ -26,7 +36,10 @@
      (map include-js ["/js/jquery-2.2.2.min.js"
                       "/js/highlight.pack.js"
                       "/js/marked.min.js"
-                      "/js/한글코딩.js"])]]))
+                      "/js/한글코딩.js"])
+     #_(GA "UA-75606874-1")]
+    ]
+   ))
 
 (함수 마크다운 [파일명]
   )
