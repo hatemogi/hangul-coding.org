@@ -10,4 +10,7 @@
   (route/not-found "찾을 수 없습니다."))
 
 (정의 앱
-  (wrap-defaults 앱라우트 site-defaults))
+  (wrap-defaults 앱라우트
+                 (assoc-in site-defaults
+                           [:responses :content-types]
+                           {:mime-types {"md" "text/plain"}})))
