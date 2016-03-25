@@ -19,12 +19,13 @@
      (map include-css ["/css/milligram.min.css"
                        "/css/색/github.css"
                        "/css/한글코딩.css"])]
-    [:body
+    [:body.container
      (머리말)
      (into [:main] 본문)
      (꼬리말)
      (map include-js ["/js/jquery-2.2.2.min.js"
                       "/js/highlight.pack.js"
+                      "/js/marked.min.js"
                       "/js/한글코딩.js"])]]))
 
 (함수 마크다운 [파일명]
