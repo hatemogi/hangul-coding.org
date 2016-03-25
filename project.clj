@@ -1,4 +1,4 @@
-(defproject hangul-coding.net "0.1.0-SNAPSHOT"
+(defproject 한글코딩 "0.1.0-SNAPSHOT"
   :description "한글로 코딩하자"
   :url "https://hangul-coding.net"
   :min-lein-version "2.0.0"

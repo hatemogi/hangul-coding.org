@@ -1,5 +1,11 @@
-(function (window) {
-    window.onload = function() {
+(function (document, window, $) {
+    $(document).ready(function() {
         console.log("한글코딩!");
-    };
-})(window);
+    });
+
+    $(document).ready(function() {
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+})(document, window, jQuery);
