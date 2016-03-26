@@ -51,9 +51,26 @@
             [:h2 "언어별 예제"]
             [:h3 "클로저 (Clojure)"]
             [:pre
-             [:code "(함수 한글이름 [인자])"]]
+             [:code "(함수 이용자-바인딩-미들웨어 [핸들러]
+  (fn [요청]
+    (바인딩 [*세션이용자* (세션이용자 요청)]
+      (핸들러 요청))))"]]
             [:pre
-             [:code "(defn 한글이름 [인자])"]]
+             [:code "(use 'ring.middleware.content-type)
+
+(def app
+  (wrap-content-type
+   your-handler
+   {:mime-types {\"foo\" \"text/x-foo\"}}))"]]
             [:h3 "SQL 예제"]
             [:pre
-             [:code "CREATE TABLE 이용자 ();"]]))
+             [:code "-- 프로젝트 테이블
+CREATE TABLE 프로젝트 (
+  소유자   VARCHAR(32) NOT NULL REFERENCES 이용자(아이디) ON DELETE CASCADE,
+  이름     VARCHAR(64) NOT NULL,
+  설명     VARCHAR(255) NOT NULL,
+  공개     BOOLEAN NOT NULL DEFAULT TRUE,
+  생성일시 TIMESTAMP NOT NULL DEFAULT NOW(),
+  갱신일시 TIMESTAMP NOT NULL DEFAULT NOW(),
+  PRIMARY KEY (소유자, 이름)
+);"]]))
