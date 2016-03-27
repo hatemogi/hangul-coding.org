@@ -13,4 +13,4 @@
   (wrap-defaults 앱라우트
                  (assoc-in site-defaults
                            [:responses :content-types]
-                           {:mime-types {"md" "text/plain"}})))
+                           {:mime-types {"md" "text/markdown"}})))

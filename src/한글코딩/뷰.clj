@@ -25,9 +25,10 @@
   (html5
    [:html {:lang "ko"}
     [:head
-     [:title "제목"]
+     [:title "한글코딩"]
      (map include-css ["/css/milligram.min.css"
                        "/css/색/github.css"
+                       "/css/theme/neo.css"
                        "/css/한글코딩.css"])]
     [:body.container
      (머리말)
@@ -36,18 +37,23 @@
      (map include-js ["/js/jquery-2.2.2.min.js"
                       "/js/highlight.pack.js"
                       "/js/marked.min.js"
+                      "/js/codemirror.js"
+                      "/js/mode/clojure/clojure.js"
+                      "/js/mode/javascript/javascript.js"
+                      "/js/mode/sql/sql.js"
                       "/js/한글코딩.js"])
      #_(GA "UA-75606874-1")]
     ]
    ))
 
 (함수 마크다운 [파일명]
-  )
+  [:div.markdown {:data-markdown 파일명}])
 
 (함수 첫페이지 [요청]
   (레이아웃 {:제목 "페이지 제목"}
             [:h1 "한글로 코딩하자"]
             [:blockquote "한글로 쓰자 체증이 풀렸다"]
+            (마크다운 "소개.md")
             [:h2 "언어별 예제"]
             [:h3 "클로저 (Clojure)"]
             [:pre
