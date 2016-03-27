@@ -11,7 +11,8 @@
   background-color: #eee;
 }
 
-code {
+code, .CodeMirror {
   /* font-family: 'Noto Sans Mono CJK KR', monospace;*/
   font-family: 'Nanum Gothic Coding', 'Roboto Mono', 'Noto Sans KR', monospace;
+  font-size: 14px;
 }

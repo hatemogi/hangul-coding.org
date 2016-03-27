@@ -27,6 +27,7 @@
     [:head
      [:title "한글코딩"]
      (map include-css ["/css/milligram.min.css"
+                       "/css/codemirror.css"
                        "/css/색/github.css"
                        "/css/theme/neo.css"
                        "/css/한글코딩.css"])]
@@ -79,4 +80,5 @@ CREATE TABLE 프로젝트 (
   생성일시 TIMESTAMP NOT NULL DEFAULT NOW(),
   갱신일시 TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (소유자, 이름)
-);"]]))
+);"]]
+            [:div#codemirror "이부분이 바뀌어야지요"]))
