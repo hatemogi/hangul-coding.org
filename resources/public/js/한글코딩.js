@@ -3,7 +3,8 @@
         marked.setOptions({
             highlight: function(코드) {
                 return hljs.highlightAuto(코드).value;
-            }
+            },
+            sanitize: true
         });
         $('div[data-markdown]').each(function() {
             var div = $(this);
@@ -30,7 +31,7 @@
                 + "  갱신일시 TIMESTAMP NOT NULL DEFAULT NOW(),\n"
                 + "  PRIMARY KEY (소유자, 이름)\n"
                 + ");";
-        CodeMirror(document.getElementById('codemirror'),
+        window.cm = CodeMirror(document.getElementById('codemirror'),
                    {lineNumbers: true, mode: "sql", theme: "default",
                     value: src});
 
