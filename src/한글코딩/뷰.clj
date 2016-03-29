@@ -5,11 +5,24 @@
   (:require [ring.util.response]))
 
 (함수- 머리말 []
-  [:nav])
+  [:nav.머리말
+   [:section.container
+    [:a.제목 {:href "/"} [:h1.제목 "한글코딩.org"]]
+    [:ul.머리말-목록.float-right
+     (for [링크 ["공감?"
+                 "인코딩!"
+                 "언어*"
+                 "도구 및 설정+"]]
+       [:li.머리말-목록-링크 [:a {:href (str "/" 링크)} 링크]])]]])
 
 (함수- 꼬리말 []
   [:footer.꼬리말
-   [:div "2016 김대현 올림"]])
+   [:section.container
+    [:ul.꼬리말-목록
+     [:li.꼬리말-목록-링크 [:a {:href "/고마운분들"} "고마운 분들"]]
+     [:li.꼬리말-목록-링크 [:a {:href "/돕는방법"} "돕는 방법"]]]
+    [:ul.꼬리말-목록.float-right
+     [:li.꼬리말-목록-링크 [:a {:href "/작성자"} "2016년 김대현 올림"]]]]])
 
 (함수- GA [코드]
   [:script
@@ -25,16 +38,28 @@
   (html5
    [:html {:lang "ko"}
     [:head
+     [:meta {:charset "utf-8"}]
+     [:meta {:content "IE=edge" :http-equiv "X-UA-Compatible"}]
+     [:meta {:content "한글로 코딩합시다" :name "description"}]
+     [:meta {:content "https://keybase.io/hatemogi" :name "author"}]
+     [:meta {:content "width=device-width, initial-scale=1.0, minimum-scale=1.0"
+       :name "viewport"}]
      [:title "한글코딩"]
-     (map include-css ["/css/milligram.min.css"
+     (map include-css ["/css/normalize.css"
+                       "/css/milligram.min.css"
                        "/css/codemirror.css"
                        "/css/색/github.css"
+                       "/css/theme/neat.css"
                        "/css/theme/neo.css"
+                       "/css/theme/base16-light.css"
+                       "/css/theme/cobalt.css"
+                       "/css/theme/ttcn.css"
                        "/css/한글코딩.css"])]
-    [:body.container
-     (머리말)
-     (into [:main] 본문)
-     (꼬리말)
+    [:body
+     [:div.포장
+      (머리말)
+      (into [:main.container] 본문)
+      (꼬리말)]
      (map include-js ["/js/jquery-2.2.2.min.js"
                       "/js/highlight.pack.js"
                       "/js/marked.min.js"
@@ -48,38 +73,15 @@
    ))
 
 (함수 마크다운 [파일명]
-  [:div.markdown {:data-markdown 파일명}])
+  [:div.마크다운 {:data-markdown 파일명}])
+
+(함수 소스코드 [파일명]
+  [:pre.소스 [:code {:data-src 파일명}]])
 
 (함수 첫페이지 [요청]
   (레이아웃 {:제목 "페이지 제목"}
-            [:h1 "한글로 코딩하자"]
-            [:blockquote "한글로 쓰자 체증이 풀렸다"]
-            (마크다운 "소개.md")
-            (마크다운 "도메인.md")
+            [:section (마크다운 "소개.md")]
+            [:section (마크다운 "공감.md")]
             [:h2 "언어별 예제"]
-            [:h3 "클로저 (Clojure)"]
-            [:pre
-             [:code "(함수 이용자-바인딩-미들웨어 [핸들러]
-  (fn [요청]
-    (바인딩 [*세션이용자* (세션이용자 요청)]
-      (핸들러 요청))))"]]
-            [:pre
-             [:code "(use 'ring.middleware.content-type)
-
-(def app
-  (wrap-content-type
-   your-handler
-   {:mime-types {\"foo\" \"text/x-foo\"}}))"]]
             [:h3 "SQL 예제"]
-            [:pre
-             [:code "-- 프로젝트 테이블
-CREATE TABLE 프로젝트 (
-  소유자   VARCHAR(32) NOT NULL REFERENCES 이용자(아이디) ON DELETE CASCADE,
-  이름     VARCHAR(64) NOT NULL,
-  설명     VARCHAR(255) NOT NULL,
-  공개     BOOLEAN NOT NULL DEFAULT TRUE,
-  생성일시 TIMESTAMP NOT NULL DEFAULT NOW(),
-  갱신일시 TIMESTAMP NOT NULL DEFAULT NOW(),
-  PRIMARY KEY (소유자, 이름)
-);"]]
-            [:div#codemirror "이부분이 바뀌어야지요"]))
+            (소스코드 "sql/프로젝트.sql")))
