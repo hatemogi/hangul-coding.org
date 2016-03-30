@@ -4,8 +4,15 @@
 
 .한글코딩 {}
 
+h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.2rem;
+}
+
 body {
-   font-family: "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
+  font-family: "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
 }
 
 blockquote {
@@ -58,23 +65,22 @@ blockquote {
 
 code, .CodeMirror {
   /* font-family: 'Noto Sans Mono CJK KR', monospace;*/
-  font-family: 'Nanum Gothic Coding', monospace;
-  font-size: 1.3rem;
+  font-family: 'D2Coding', 'Nanum Gothic Coding', monospace;
+  font-size: 1.2rem;
 }
 
 .CodeMirror {
-  border: .05rem solid #aaa;
+  border: .1rem solid #eee;
   border-left: .3rem solid #9b4dca;
-  border-radius: 0.5rem;
   height: auto;
-  background-color: #f3f3f3;
+  background-color: #f0f0f0;
   padding-left: 0rem;
   margin-bottom: 0.5rem;
 }
 
 @media (min-width: 60.0rem) {
   code, .CodeMirror {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .CodeMirror {
@@ -93,11 +99,8 @@ code, .CodeMirror {
   width: 100%;
 }
 
-.button {
-  font-size: 1.5rem;
-  font-weight: normal;
-}
-
-.버튼그룹 .button {
-  margin-right: 0.5rem;
+img.프로필 {
+  width: 100%;
+  padding: .5rem;
+  border-radius: 50%;
 }

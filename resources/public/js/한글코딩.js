@@ -5,9 +5,15 @@
             var pre = 코드.parentNode;
             var 소스 = $(코드).text();
             var 언어 = $(코드).attr("data-lang");
-            var 테마 = "default";
+            var 마임 = {java:       "text/x-java",
+                        json:       "application/json",
+                        javascript: "text/javascript",
+                        sql:        "text/x-pgsql",
+                        clojure:    "text/x-clojure"};
+            var 모드 = 마임[언어] || 언어;
+            var 테마 = "neo";
             var 옵션 = {value: 소스, lineNumbers: false,
-                        mode: 언어, theme: 테마};
+                        mode: 모드, theme: 테마};
             CodeMirror(function(e) {
                 pre.parentNode.replaceChild(e, pre);
             }, 옵션);
@@ -41,7 +47,7 @@
         });
         $('div[data-markdown]').each(function() {
             var div = $(this);
-            var 파일 = "/md/" + div.attr("data-markdown");
+            var 파일 = div.attr("data-markdown");
             $.get(파일, function(본문, xhr) {
                 div.html(marked(본문));
                 소스코드_에디터();
