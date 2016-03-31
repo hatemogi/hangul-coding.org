@@ -17,6 +17,7 @@
 (defroutes 앱라우트
   (GET "/" [] 첫페이지)
   (GET (주소 "/작성자") [] 작성자소개)
+  (GET (주소 "/프로그래밍-언어") [] 프로그래밍-언어)
   (GET "/:md파일" [md파일]
     (가정 [파일명 (str "/md/" md파일 ".md")]
       (만약 (io/resource (str "public" 파일명))

@@ -1,10 +1,16 @@
 (function (document, window, $) {
 
-    var 소스코드_에디터 = function() {
-        $('pre code.소스코드').each(function(i, 코드) {
-            var pre = 코드.parentNode;
-            var 소스 = $(코드).text();
-            var 언어 = $(코드).attr("data-lang");
+    var GET = function(경로, 콜백) {
+        // IE9에서는 인코딩이 필요하더라
+        var 경로 = 경로.split("/").map(encodeURIComponent).join("/");
+        return $.get(경로, 콜백);
+    };
+
+    var 소스코드표시 = function () {
+        $('div[data-source][data-processed!="true"]').each(function(i, 노드) {
+            var 블럭 = $(this).attr('data-processed', true);
+            var 소스 = 블럭.attr("data-body") || 블럭.html();
+            var 언어 = $(블럭).attr("data-lang");
             var 마임 = {java:       "text/x-java",
                         json:       "application/json",
                         javascript: "text/javascript",
@@ -15,12 +21,16 @@
             var 옵션 = {value: 소스, lineNumbers: false,
                         mode: 모드, theme: 테마};
             CodeMirror(function(e) {
-                pre.parentNode.replaceChild(e, pre);
+                노드.parentNode.replaceChild(e, 노드);
             }, 옵션);
         });
     };
 
-    $(function 마크다운() {
+    $(소스코드표시);
+
+    var 비동기_로드;
+
+    var 마크다운 = function() {
         var 변환 = new marked.Renderer();
 
         // 기본 heading처리는 h태그 텍스트가 영문(+숫자)만 잘 처리 되기에,
@@ -34,8 +44,8 @@
         };
 
         변환.code = function(코드, 언어, escape) {
-            return '<pre><code class="소스코드" data-lang="' + 언어 +
-                '">' + 코드 + '</code></pre>';
+            return '<div class="소스" data-source="true" data-lang="' + 언어 +
+                '">' + 코드 + '</div>';
         };
 
         marked.setOptions({
@@ -45,31 +55,36 @@
             sanitize: true,
             renderer: 변환
         });
-        $('div[data-markdown]').each(function() {
-            var div = $(this);
-            var 파일 = div.attr("data-markdown");
-            $.get(파일, function(본문, xhr) {
-                div.html(marked(본문));
-                소스코드_에디터();
+
+        $('div[data-markdown][data-processed!="true"]').each(function() {
+            var div = $(this).attr("data-processed", true);;
+            var 옵션 = div.attr("data-option");
+            var 본문 = div.attr("data-body");
+            div.html(marked(본문, {sanitize: (옵션 != "신뢰")}));
+            소스코드표시();
+            비동기_로드();
+        });
+    };
+
+    비동기_로드 = function() {
+        $('div[data-remote][data-loaded!="true"]').each(function() {
+            var 노드 = $(this).attr("data-loaded", true);
+            var 소스 = 노드.attr('data-remote');
+            var 타입 = 노드.attr('data-type');
+            GET(소스, function(본문) {
+                노드.attr("data-body", 본문);
+                if (타입 == "마크다운") {
+                    노드.attr("data-markdown", true);
+                    비동기_로드();
+                    마크다운();
+                } else if (타입 == "소스코드") {
+                    노드.attr("data-source", true);
+                    소스코드표시();
+                }
             });
         });
-    });
+    };
 
-    $(function 소스코드() {
-        $('pre.소스 code').each(function() {
-            var code = $(this);
-            var 파일 = "/src/" + code.attr("data-src");
-            $.get(파일, function(본문, xhr) {
-                code.html(hljs.highlightAuto(본문).value);
-            });
-        });
-    });
-
-    $(function 하이라이트() {
-        return "건너뛰기";
-        $('pre code').each(function(i, 블럭) {
-            hljs.highlightBlock(블럭);
-        });
-    });
+    $(비동기_로드);
 
 })(document, window, jQuery);

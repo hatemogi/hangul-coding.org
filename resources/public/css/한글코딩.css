@@ -2,8 +2,6 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-.한글코딩 {}
-
 h2 {
   border-bottom: 1px solid #ccc;
   padding-bottom: 0.2rem;
@@ -19,10 +17,14 @@ blockquote {
   background-color: #f9f9f9;
 }
 
-.마크다운 ul, .마크다운 ol {
-  background-color: #f9f9f9;
+마크다운 ul, .마크다운 ol {
+/*  background-color: #f9f9f9;
   border-left: 0.3rem solid #bbb;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; */
+}
+
+.마크다운-제목-링크 {
+
 }
 
 .머리말 {
@@ -45,9 +47,9 @@ blockquote {
 }
 
 .머리말-목록, .꼬리말-목록 {
-  display: inline-block;
+  display: inline;
   list-style: none;
-  margin-right: 0;
+  margin: 0;
 }
 
 .머리말-목록-링크, .꼬리말-목록-링크 {
@@ -73,6 +75,7 @@ code, .CodeMirror {
   border: .1rem solid #eee;
   border-left: .3rem solid #9b4dca;
   height: auto;
+  max-height: 300px;
   background-color: #f0f0f0;
   padding-left: 0rem;
   margin-bottom: 0.5rem;
@@ -90,7 +93,7 @@ code, .CodeMirror {
 }
 
 .container {
-  max-width: 100rem;
+  max-width: 90rem;
 }
 
 .포장 {
