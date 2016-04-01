@@ -9,13 +9,18 @@
     var 소스코드표시 = function () {
         $('div[data-source][data-processed!="true"]').each(function(i, 노드) {
             var 블럭 = $(this).attr('data-processed', true);
-            var 소스 = 블럭.attr("data-body") || 블럭.html();
-            var 언어 = $(블럭).attr("data-lang");
+            var 소스 = 블럭.attr("data-body") || 블럭.text();
+            var 언어 = 블럭.attr("data-lang");
+            var 파일 = 블럭.attr("data-remote");
+            if (!언어 && !!파일) 언어 = 파일.split(".").pop();
             var 마임 = {java:       "text/x-java",
                         json:       "application/json",
                         javascript: "text/javascript",
+                        js:         "text/javascript",
+                        css:        "text/css",
                         sql:        "text/x-pgsql",
-                        clojure:    "text/x-clojure"};
+                        clojure:    "text/x-clojure",
+                        clj:        "text/x-clojure"};
             var 모드 = 마임[언어] || 언어;
             var 테마 = "neo";
             var 옵션 = {value: 소스, lineNumbers: false,
