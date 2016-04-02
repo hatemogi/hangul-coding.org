@@ -88,9 +88,7 @@
 (함수 첫페이지 [요청]
   (레이아웃 {:제목 "소개"}
             [:section (마크다운 "/md/소개.md")]
-            [:section (마크다운 "/md/공감.md")]
-            [:section.페이지-이동
-             [:div.float-right [:a.button.button-large {:href "/유니코드"} "유니코드"]]]))
+            [:section (마크다운 "/md/공감.md")]))
 
 (함수 작성자소개 [요청]
   (레이아웃 {:제목 "작성자 소개"}
