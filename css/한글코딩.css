@@ -1,0 +1,148 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+h2 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.2rem;
+}
+
+body {
+  font-family: "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+.button {
+  font-family: "Roboto", "Noto Sans KR";
+  font-size: 1.5rem;
+}
+
+blockquote {
+  background-color: #f9f9f9;
+}
+
+a.제목-링크 {
+  display: inline-block;
+  margin-left: -1.7rem;
+  margin-right: .5rem;
+  vertical-align: middle;
+  color:  #fdfdfd;
+  font-size: 2rem;
+}
+
+h1:hover a.제목-링크,
+h2:hover a.제목-링크 {
+  color: #777;
+}
+
+마크다운 ul, .마크다운 ol {
+/*  background-color: #f9f9f9;
+  border-left: 0.3rem solid #bbb;
+  padding: 0.5rem 1rem; */
+}
+
+.머리말 {
+  position: fixed;
+  top: 0;
+  z-index: 9;
+  background-color: #f4f5f6;
+  opacity: .96;
+  border-bottom: .1rem solid #d1d1d1;
+  display: block;
+  height: 5.2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+main.본문 {
+  min-height: 30rem;
+  margin-top: 5.5rem;
+}
+
+.머리말 .제목 {
+  color: #606c76;
+  display: inline;
+  line-height: 5.2rem;
+  font-size: 2.5rem;
+  position: relative;
+  text-decoration: none;
+}
+
+.머리말-목록, .꼬리말-목록 {
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.목록-링크 {
+  display: inline;
+  white-space: nowrap;
+  margin-left: 2rem;
+  line-height: 5.2rem;
+}
+
+.목록-링크:first-child {
+  margin-left: 0;
+}
+
+.같은간격 {
+  display: flex;
+  justif-content: space-between;
+}
+
+.페이지-이동 {
+  display: block;
+  width: 100%;
+  min-height: 5rem;
+}
+
+.꼬리말 {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  height: 16rem;
+  background-color: #d7d7d7;
+}
+
+code, .CodeMirror {
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 1.2rem;
+}
+
+.CodeMirror {
+  border: .1rem solid #eee;
+  height: auto;
+  background-color: #f0f0f0;
+  padding-left: 0rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 60.0rem) {
+  code, .CodeMirror {
+    font-size: 1.4rem;
+  }
+
+  .CodeMirror {
+    padding-left: .5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.container {
+  max-width: 90rem;
+}
+
+.포장 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+img.프로필 {
+  width: 100%;
+  padding: .5rem;
+  border-radius: 50%;
+}

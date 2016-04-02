@@ -1,0 +1,23 @@
+/* 한글코딩.org 스타일시트 일부 */
+
+.머리말 {
+  border-bottom: .1rem solid #d1d1d1;
+  height: 5.2rem;
+  margin-bottom: 1rem;
+}
+
+.머리말-목록, .꼬리말-목록 {
+  display: inline;
+  list-style: none;
+}
+
+.목록-링크 {
+  display: inline;
+  line-height: 5.2rem;
+}
+
+img.프로필 {
+  width: 100%;
+  padding: .5rem;
+  border-radius: 50%;
+}
