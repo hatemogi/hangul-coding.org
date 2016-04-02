@@ -5,7 +5,7 @@
     var GET = function(경로, 콜백) {
         // IE9에서는 인코딩이 필요하더라
         var 경로 = 경로.split("/").map(encodeURIComponent).join("/");
-        return $.get(경로, 콜백);
+        return $.get(경로.replace(/^\//, ""), 콜백);
     };
 
     var 소스코드표시 = function () {
