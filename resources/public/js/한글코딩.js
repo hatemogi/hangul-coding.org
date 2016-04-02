@@ -1,5 +1,7 @@
 (function (document, window, $) {
 
+    $.ajaxSetup({cache: false});
+
     var GET = function(경로, 콜백) {
         // IE9에서는 인코딩이 필요하더라
         var 경로 = 경로.split("/").map(encodeURIComponent).join("/");
@@ -23,7 +25,7 @@
                         clj:        "text/x-clojure"};
             var 모드 = 마임[언어] || 언어;
             var 테마 = "neo";
-            var 옵션 = {value: 소스, lineNumbers: false,
+            var 옵션 = {value: 소스, lineNumbers: true,
                         mode: 모드, theme: 테마};
             CodeMirror(function(e) {
                 노드.parentNode.replaceChild(e, 노드);
@@ -43,9 +45,8 @@
         변환.heading = function(텍스트, 레벨) {
             var 링크 = 텍스트.toLowerCase().replace(/[\s]+/g, '-');
             return '<h' + 레벨 + '><a name="' + 링크 +
-                '" class="anchor" href="#' + 링크 +
-                '"><span class="header-link"></span></a>' +
-                텍스트 + '</h' + 레벨 + '>';
+                '" class="제목-링크" href="#' + 링크 +
+                '">#</a>' + 텍스트 + '</h' + 레벨 + '>';
         };
 
         변환.code = function(코드, 언어, escape) {

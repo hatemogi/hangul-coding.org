@@ -1,31 +1,19 @@
-// 한글코딩.org 스타일시트 일부
+/* 한글코딩.org 스타일시트 일부 */
 
 .머리말 {
-  background: #f4f5f6;
   border-bottom: .1rem solid #d1d1d1;
-  display: block;
   height: 5.2rem;
   margin-bottom: 1rem;
-  width: 100%;
 }
 
 .머리말-목록, .꼬리말-목록 {
   display: inline;
   list-style: none;
-  margin: 0;
 }
 
-.머리말-목록-링크, .꼬리말-목록-링크 {
+.목록-링크 {
   display: inline;
-  padding-left: 2rem;
   line-height: 5.2rem;
-}
-
-.꼬리말 {
-  width: 100%;
-  height: 10rem;
-  padding: 1rem;
-  background-color: #eee;
 }
 
 img.프로필 {

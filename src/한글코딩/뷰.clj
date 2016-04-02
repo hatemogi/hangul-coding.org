@@ -12,9 +12,9 @@
      [:section.container
       [:a.제목 {:href "/"} [:h1.제목 "한글코딩"]]
       [:ul.머리말-목록.float-right
-       (for [주제 ["유니코드"
-                   "프로그래밍 언어"
+       (for [주제 ["언어"
                    "도구 및 설정"
+                   "유니코드"
                    "소통"]]
          [:li.목록-링크 [:a {:href (링크 주제)} 주제]])]]]))
 
@@ -24,7 +24,7 @@
     [:footer.꼬리말
      [:section.container
       [:ul.꼬리말-목록
-       (링크 "/돕는방법" "돕는 방법")]
+       (링크 "/도와주기" "도와주기")]
       [:ul.꼬리말-목록.float-right
        (링크 "/작성자" "2016년 김대현")]]]))
 
@@ -54,12 +54,15 @@
                       "/css/색/github.css"
                       "/css/theme/neat.css"
                       "/css/theme/neo.css"
+                      "/css/theme/elegant.css"
+                      "/css/theme/ambiance.css"
+                      "/css/theme/mbo.css"
                       "/css/theme/ttcn.css"
                       "/css/한글코딩.css"])]
    [:body
     [:div.포장
      (머리말)
-     (into [:main.container] 본문)
+     (into [:main.container.본문] 본문)
      (꼬리말)]
     (map include-js ["/js/jquery-2.2.2.min.js"
                      "/js/highlight.pack.js"
@@ -85,7 +88,9 @@
 (함수 첫페이지 [요청]
   (레이아웃 {:제목 "소개"}
             [:section (마크다운 "/md/소개.md")]
-            [:section (마크다운 "/md/공감.md")]))
+            [:section (마크다운 "/md/공감.md")]
+            [:section.페이지-이동
+             [:div.float-right [:a.button.button-large {:href "/유니코드"} "유니코드"]]]))
 
 (함수 작성자소개 [요청]
   (레이아웃 {:제목 "작성자 소개"}
@@ -97,6 +102,19 @@
 (함수 프로그래밍-언어 [요청]
   (레이아웃 {:제목 "프로그래밍 언어별 예"}
             (위험한마크다운 "/md/프로그래밍-언어.md")))
+
+(함수 소통 [요청]
+  (레이아웃 {:제목 "소통"
+             :스크립트 []}
+            [:section.container
+             [:h1 "트위터 타임라인"]
+             [:a.twitter-timeline
+              {:href "https://twitter.com/hashtag/%ED%95%9C%EA%B8%80%EC%BD%94%EB%94%A9"
+               :data-widget-id "715893526781829120" :data-dnt true :lang "ko" :data-lang "ko"}
+              "#한글코딩 관련 트윗"]
+             [:script
+              "!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');"]
+             ]))
 
 (함수 찾을수없어요 [요청]
   (레이아웃 {}
