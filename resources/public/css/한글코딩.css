@@ -1,16 +1,12 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+body {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+}
 
 h2 {
   border-bottom: 1px solid #ccc;
   padding-bottom: 0.2rem;
-}
-
-body {
-  font-family: "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
-  background-color: #fdfdfd;
-  color: #333;
 }
 
 .button {
@@ -27,7 +23,7 @@ a.제목-링크 {
   margin-left: -1.7rem;
   margin-right: .5rem;
   vertical-align: middle;
-  color:  #fdfdfd;
+  color: transparent;
   font-size: 2rem;
 }
 
@@ -57,7 +53,7 @@ h2:hover a.제목-링크 {
 
 main.본문 {
   min-height: 30rem;
-  margin-top: 5.5rem;
+  margin-top: 6rem;
 }
 
 .머리말 .제목 {
@@ -142,7 +138,9 @@ code, .CodeMirror {
 }
 
 img.프로필 {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 20rem;
   padding: .5rem;
   border-radius: 50%;
 }

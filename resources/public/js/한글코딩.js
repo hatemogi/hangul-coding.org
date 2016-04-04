@@ -33,9 +33,7 @@
         });
     };
 
-    $(소스코드표시);
-
-    var 비동기_로드;
+    var 문서변환;
 
     var 마크다운 = function() {
         var 변환 = new marked.Renderer();
@@ -63,12 +61,11 @@
         });
 
         $('div[data-markdown][data-processed!="true"]').each(function() {
-            var div = $(this).attr("data-processed", true);;
+            var div = $(this).attr("data-processed", true);
             var 옵션 = div.attr("data-option");
-            var 본문 = div.attr("data-body");
+            var 본문 = div.attr("data-body") || div.text();
             div.html(marked(본문, {sanitize: (옵션 != "신뢰")}));
-            소스코드표시();
-            비동기_로드();
+            setTimeout(문서변환, 0);
         });
     };
 
@@ -81,8 +78,7 @@
                 노드.attr("data-body", 본문);
                 if (타입 == "마크다운") {
                     노드.attr("data-markdown", true);
-                    비동기_로드();
-                    마크다운();
+                    문서변환();
                 } else if (타입 == "소스코드") {
                     노드.attr("data-source", true);
                     소스코드표시();
@@ -91,6 +87,12 @@
         });
     };
 
-    $(비동기_로드);
+    문서변환 = function() {
+        비동기_로드();
+        마크다운();
+        소스코드표시();
+    };
+
+    $(문서변환);
 
 })(document, window, jQuery);

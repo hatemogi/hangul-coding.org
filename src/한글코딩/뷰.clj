@@ -2,18 +2,19 @@
   (:use [미생.기본]
         [hiccup.core]
         [hiccup.page])
-  (:require [clojure.string :as s]
+  (:require [hiccup.util :refer [escape-html]]
+            [clojure.string :as s]
             [ring.util.response :as 응답]))
 
 (함수- 머리말 []
   (가정 [링크 (fn [주제]
-                (str "/" (s/replace 주제 #"\s" "-")))]
+                (str "/" (s/replace 주제 #"\s" "-") ".html"))]
     [:nav.머리말
      [:section.container
       [:a.제목 {:href "/"} [:h1.제목 "한글코딩"]]
       [:ul.머리말-목록.float-right
        (for [주제 ["언어"
-                   "도구 및 설정"
+                   "도구"
                    "유니코드"
                    "소통"]]
          [:li.목록-링크 [:a {:href (링크 주제)} 주제]])]]]))
@@ -24,9 +25,9 @@
     [:footer.꼬리말
      [:section.container
       [:ul.꼬리말-목록
-       (링크 "/도와주기" "도와주기")]
+       (링크 "/도와주기.html" "도와주기")]
       [:ul.꼬리말-목록.float-right
-       (링크 "/작성자" "2016년 김대현")]]]))
+       (링크 "/작성자.html" "2016년 김대현")]]]))
 
 (함수- GA [코드]
   [:script
@@ -39,79 +40,73 @@
   ga('send', 'pageview');"])
 
 (함수 레이아웃 [속성 & 본문]
-  (html5 {:lang "ko"}
-   [:head
-    [:meta {:charset "utf-8"}]
-    [:meta {:content "IE=edge" :http-equiv "X-UA-Compatible"}]
-    [:meta {:content "한글로 코딩합시다" :name "description"}]
-    [:meta {:content "https://keybase.io/hatemogi" :name "author"}]
-    [:meta {:content "width=device-width, initial-scale=1.0, minimum-scale=1.0"
-            :name "viewport"}]
-    [:title "한글코딩" (만약-가정 [제목 (:제목 속성)] (str " | " 제목))]
-    (map include-css ["/css/normalize.css"
-                      "/css/milligram.min.css"
-                      "/css/codemirror.css"
-                      "/css/색/github.css"
-                      "/css/theme/neat.css"
-                      "/css/theme/neo.css"
-                      "/css/theme/elegant.css"
-                      "/css/theme/ambiance.css"
-                      "/css/theme/mbo.css"
-                      "/css/theme/ttcn.css"
-                      "/css/한글코딩.css"])]
-   [:body
-    [:div.포장
-     (머리말)
-     (into [:main.container.본문] 본문)
-     (꼬리말)]
-    (map include-js ["/js/jquery-2.2.2.min.js"
-                     "/js/highlight.pack.js"
-                     "/js/marked.min.js"
-                     "/js/codemirror.js"
-                     "/js/mode/clojure/clojure.js"
-                     "/js/mode/javascript/javascript.js"
-                     "/js/mode/css/css.js"
-                     "/js/mode/clike/clike.js"
-                     "/js/mode/sql/sql.js"
-                     "/js/한글코딩.js"])
-    #_(GA "UA-75606874-1")]))
+  (가정 [타이틀 (str "한글코딩" (만약-가정 [제목 (:제목 속성)] (str " | " 제목)))
+         설명 "개발자는 평소 한국어로 말하고 듣고 한글을 읽고 쓰며 지냅니다. 그런데 왜 소스코드를 작성할 때는 영문만 쓰는 걸까요? 한국말로 말하듯 한글로 글 쓰듯, 한글로 코딩해 봅시다. 개발하기 한결 쉬워집니다."]
+    (html5 {:lang "ko"}
+           [:head
+            [:meta {:charset "utf-8"}]
+            [:meta {:content "IE=edge" :http-equiv "X-UA-Compatible"}]
+            [:meta { :name "description" :content 설명}]
+            [:meta {:name "author" :content "https://medium.com/@hatemogi"}]
+            [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, minimum-scale=0.7"}]
+
+            [:meta {:name "og:site_name" :content "한글코딩"}]
+            [:meta {:name "og:url" :content "http://한글코딩.org/"}]
+            [:meta {:name "og:title" :content 타이틀}]
+            [:meta {:name "og:locale" :content "ko_KR"}]
+            [:meta {:name "og:description" :content 설명}]
+
+            [:meta {:name "twitter:card" :content "summary"}]
+            [:meta {:name "twitter:site" :content "@hangulcoding"}]
+            [:meta {:name "twitter:title" :content 타이틀}]
+            [:meta {:name "twitter:description" :content 설명}]
+
+            [:title 타이틀]
+            (map include-css ["https://fonts.googleapis.com/css?family=Roboto"
+                              "http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css"
+                              "묶음.css"])]
+           [:body
+            [:div.포장
+             (머리말)
+             (into [:main.container.본문] 본문)
+             (꼬리말)]
+            (map include-js ["묶음.js"])
+            (GA "UA-75606874-1")])))
+
+(함수 리모트마크다운 [파일명]
+  [:div.마크다운 {:data-remote 파일명 :data-type "마크다운" :data-option "신뢰"}])
 
 (함수 마크다운 [파일명]
-  [:div.마크다운 {:data-remote 파일명 :data-type "마크다운"}])
-
-(함수 위험한마크다운 [파일명]
-  [:div.마크다운 {:data-remote 파일명 :data-type "마크다운" :data-option "신뢰"}])
+  [:div.마크다운 {:data-markdown true :data-option "신뢰"}
+   (-> (str "resources/public" 파일명) slurp escape-html)])
 
 (함수 하이라이트 [파일명]
   [:div.소스 {:data-remote 파일명 :data-type "소스코드"}])
 
 (함수 첫페이지 [요청]
   (레이아웃 {:제목 "소개"}
-            [:section (마크다운 "/md/소개.md")]
-            [:section (마크다운 "/md/공감.md")]))
-
-(함수 작성자소개 [요청]
-  (레이아웃 {:제목 "작성자 소개"}
-            [:section.container
-             [:div.row
-              [:div.column.column-25 [:img.프로필 {:src "/img/프로필.jpg"}]]
-              [:div.colunm.column-75 [:div (마크다운 "/md/작성자.md")]]]]))
-
-(함수 프로그래밍-언어 [요청]
-  (레이아웃 {:제목 "프로그래밍 언어별 예"}
-            (위험한마크다운 "/md/프로그래밍-언어.md")))
+            [:section (리모트마크다운 "/md/소개.md")]
+            [:section (리모트마크다운 "/md/공감.md")]))
 
 (함수 소통 [요청]
   (레이아웃 {:제목 "소통"
              :스크립트 []}
-            [:section.container
-             [:h1 "트위터 타임라인"]
+            [:section
+             [:h1 "사람들의 이야기"]]
+            [:section
+             [:h2 "트위터 타임라인"]
              [:a.twitter-timeline
               {:href "https://twitter.com/hashtag/%ED%95%9C%EA%B8%80%EC%BD%94%EB%94%A9"
                :data-widget-id "715893526781829120" :data-dnt true :lang "ko" :data-lang "ko"}
               "#한글코딩 관련 트윗"]
              [:script
-              "!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');"]
+              "!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');"]]
+            [:section
+             [:h2 "페이스북 페이지"]
+             [:ul [:li [:a {:href "https://facebook.com/hangulcoding"} "https://facebook.com/hangulcoding"] ]]]
+            [:section
+             [:h2 "GitHub 페이지"]
+             [:ul [:li [:a {:href "https://github.com/hatemogi/hangul-coding.org"} "hatemogi/hangul-coding.org"] ]]
              ]))
 
 (함수 찾을수없어요 [요청]
