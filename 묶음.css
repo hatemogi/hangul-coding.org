@@ -774,106 +774,6 @@ div.CodeMirror-dragcursors {
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext { background: none; }
 
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  color: #333;
-  background: #f8f8f8;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #998;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-subst {
-  color: #333;
-  font-weight: bold;
-}
-
-.hljs-number,
-.hljs-literal,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
-}
-
-.hljs-string,
-.hljs-doctag {
-  color: #d14;
-}
-
-.hljs-title,
-.hljs-section,
-.hljs-selector-id {
-  color: #900;
-  font-weight: bold;
-}
-
-.hljs-subst {
-  font-weight: normal;
-}
-
-.hljs-type,
-.hljs-class .hljs-title {
-  color: #458;
-  font-weight: bold;
-}
-
-.hljs-tag,
-.hljs-name,
-.hljs-attribute {
-  color: #000080;
-  font-weight: normal;
-}
-
-.hljs-regexp,
-.hljs-link {
-  color: #009926;
-}
-
-.hljs-symbol,
-.hljs-bullet {
-  color: #990073;
-}
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #0086b3;
-}
-
-.hljs-meta {
-  color: #999;
-  font-weight: bold;
-}
-
-.hljs-deletion {
-  background: #fdd;
-}
-
-.hljs-addition {
-  background: #dfd;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
-}
-
 .cm-s-neat span.cm-comment { color: #a86; }
 .cm-s-neat span.cm-keyword { line-height: 1em; font-weight: bold; color: blue; }
 .cm-s-neat span.cm-string { color: #a22; }
@@ -1123,15 +1023,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .cm-s-ttcn .cm-types { color: #A52A2A; font-weight:bold; }
 .cm-s-ttcn .cm-visibilityModifiers { font-weight:bold; }
 
+body {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
 h2 {
   border-bottom: 1px solid #ccc;
   padding-bottom: 0.2rem;
-}
-
-body {
-  font-family: "Roboto", "Noto Sans KR", "Helvetica Neue", sans-serif;
-  background-color: #fdfdfd;
-  color: #333;
 }
 
 .button {
@@ -1148,7 +1048,7 @@ a.제목-링크 {
   margin-left: -1.7rem;
   margin-right: .5rem;
   vertical-align: middle;
-  color:  #fdfdfd;
+  color: transparent;
   font-size: 2rem;
 }
 
@@ -1178,7 +1078,7 @@ h2:hover a.제목-링크 {
 
 main.본문 {
   min-height: 30rem;
-  margin-top: 5.5rem;
+  margin-top: 6rem;
 }
 
 .머리말 .제목 {
@@ -1263,7 +1163,9 @@ code, .CodeMirror {
 }
 
 img.프로필 {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 20rem;
   padding: .5rem;
   border-radius: 50%;
 }
