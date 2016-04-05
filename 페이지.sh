@@ -16,3 +16,4 @@ mkdir -p $RES/md $RES/src
 cp $RES/묶음.css $RES/묶음.js $DEST/
 cp -r $RES/md/* $DEST/md/
 cp -r $RES/src/* $DEST/src/
+cp -r $RES/img/* $DEST/img/
