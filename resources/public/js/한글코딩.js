@@ -69,7 +69,7 @@
         });
     };
 
-    비동기_로드 = function() {
+    var 비동기_로드 = function() {
         $('div[data-remote][data-loaded!="true"]').each(function() {
             var 노드 = $(this).attr("data-loaded", true);
             var 소스 = 노드.attr('data-remote');
@@ -95,7 +95,7 @@
 
     $(문서변환);
 
-    var 구글분석 = function() {
+    $(function 구글분석() {
         var 코드 = 'UA-75606874-1';
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -104,8 +104,6 @@
 
         ga('create', 'UA-75606874-1', 'auto');
         ga('send', 'pageview');
-    };
-
-    $(구글분석);
+    });
 
 })(document, window, jQuery);
