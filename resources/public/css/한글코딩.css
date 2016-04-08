@@ -12,6 +12,7 @@ h2 {
 .button {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
+  text-transform: none;
 }
 
 blockquote {

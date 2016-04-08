@@ -31,6 +31,7 @@
   [:section.containter
    [:a.button {:href "언어.html"} "언어별 예제"] " "
    [:a.button {:href "도구.html"} "도구 및 설정"] " "
+   [:a.button {:href "글꼴실험.html"} "글꼴실험"] " "
    [:a.button {:href "유니코드.html"} "유니코드"] " "
    [:a.button {:href "소통.html"} "소통"]])
 

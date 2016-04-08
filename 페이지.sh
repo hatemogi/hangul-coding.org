@@ -2,7 +2,7 @@
 LOCAL=http://0.0.0.0:3000
 DEST=gh-pages
 GET=http
-FILES="유니코드 404 작성자 언어 도구 도와주기 소통"
+FILES="유니코드 404 작성자 언어 도구 도와주기 소통 글꼴실험"
 
 $GET $LOCAL> $DEST/index.html
 
@@ -12,8 +12,11 @@ done
 
 RES=resources/public
 
-mkdir -p $RES/md $RES/src
+mkdir -p $RES/md
 cp $RES/묶음.css $RES/묶음.js $DEST/
-cp -r $RES/md/* $DEST/md/
-cp -r $RES/src/* $DEST/src/
-cp -r $RES/img/* $DEST/img/
+
+DIRS="md img src font"
+for d in $DIRS; do
+    mkdir -p $DEST/$d
+    cp -r $RES/$d/* $DEST/$d/
+done
